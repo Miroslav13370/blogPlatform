@@ -1,0 +1,95 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier",
+    "plugin:prettier/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    }
+  },
+  "plugins": ["react", "import", "jsx-a11y", "prettier", "react-hooks"],
+  "rules": {
+    "prettier/prettier": "error",
+    "react/jsx-filename-extension": ["error", { "extensions": [".jsx", ".js"] }],
+    "import/no-unresolved": "off",
+    "import/extensions": ["error", "ignorePackages", { "js": "never", "jsx": "never" }],
+    "no-unused-vars": "warn",
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "no-console": "off",
+    "no-underscore-dangle": "off",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["state"]
+      }
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/vite.config.*"]
+      }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "node:crypto",
+            "message": "Используй 'crypto' вместо 'node:crypto'."
+          },
+          {
+            "name": "node:stream",
+            "message": "Используй 'stream' вместо 'node:stream'."
+          },
+          {
+            "name": "node:buffer",
+            "message": "Используй 'buffer' вместо 'node:buffer'."
+          },
+          {
+            "name": "node:util",
+            "message": "Используй 'util' вместо 'node:util'."
+          },
+          {
+            "name": "node:assert",
+            "message": "Использование node:assert запрещено."
+          }
+        ],
+        "patterns": ["node:*"]
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx"]
+      }
+    }
+  }
+}
