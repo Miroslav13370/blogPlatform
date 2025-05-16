@@ -1,0 +1,101 @@
+.artikleBox {
+  box-sizing: border-box;
+  width: 938px;
+  background-color: white;
+  display: flex;
+  margin: 22px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px 0 #00000026;
+  border-radius: 5px;
+  .leftBlock {
+    margin: 16px;
+    margin-right: 0;
+    width: 682px;
+    .body {
+      width: 880px;
+    }
+    .description {
+      display: block;
+      margin: 0;
+      padding: 0;
+      font-size: 12px;
+      color: #000000bf;
+    }
+  }
+  .rigthBlock {
+    margin: 16px;
+    margin-left: 0;
+    display: flex;
+    .rigthBlockText {
+      margin-right: 12px;
+    }
+    .username {
+      display: block;
+      margin: 0;
+      padding: 0;
+      font-size: 18px;
+      text-transform: uppercase;
+      margin-top: 7px;
+    }
+    .createdAt {
+      display: block;
+      margin: 0;
+      padding: 0;
+      font-size: 12px;
+      color: #00000080;
+    }
+  }
+
+  .tagBox {
+    display: flex;
+    margin-bottom: 5px;
+    .tagElem {
+      margin: 0;
+      padding: 0;
+      display: block;
+      padding-left: 6px;
+      padding-right: 6px;
+      padding-bottom: 1px;
+      padding-top: 1px;
+      color: #00000080;
+      border: 1px solid #00000080;
+      font-size: 12px;
+      margin-right: 8px;
+      border-radius: 2px;
+    }
+  }
+  .titleBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5px;
+    .favoritesCount {
+      display: block;
+      margin: 0;
+      padding: 0;
+      font-size: 12px;
+      color: #000000bf;
+      margin-left: 2px;
+    }
+    .title {
+      margin: 0;
+      padding: 0;
+      font-size: 20px;
+      color: #1890ff;
+      margin-right: 10px;
+      display: block;
+      text-decoration: none;
+    }
+    .heart {
+      margin-right: 3px;
+    }
+  }
+  .logo {
+    width: 46px;
+    height: 46px;
+    object-fit: cover;
+    border-radius: 100%;
+  }
+}
