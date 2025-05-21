@@ -6,6 +6,9 @@ import Layout from './components/Layout/Layout';
 import './main.scss';
 import ArtikleList from './components/ArtikleList/ArtikleList';
 import Artikle from './components/Artikle/Artikle';
+import SignUp from './components/signUp/SignUp';
+import SingIn from './components/SingIn/SingIn';
+import Profile from './components/Profile/Profile';
 
 import store from './store/store';
 
@@ -26,6 +29,9 @@ const router = createBrowserRouter([
         path: 'articles/:slug',
         element: <Artikle />,
       },
+      { path: 'sign-up', element: <SignUp /> },
+      { path: 'sign-in', element: <SingIn /> },
+      { path: 'profile', element: <Profile /> },
     ],
   },
 ]);

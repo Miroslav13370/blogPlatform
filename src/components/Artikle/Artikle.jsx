@@ -1,16 +1,24 @@
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import ReactMarkdown from 'react-markdown';
 import { format } from 'date-fns';
-import { useGetArticleBySlagQuery } from '../Api/artikleApi';
+import { useEffect } from 'react';
+import { useGetArticleBySlagQuery, useGetCurrentUserQuery } from '../Api/artikleApi';
 import style from './Artikle.module.scss';
 import Vector from '../img/Vector.svg';
 
 function Artikle() {
   const { slug } = useParams();
+  const navigate = useNavigate();
 
   const { data = [], isLoading } = useGetArticleBySlagQuery({ slug }, { skip: !slug });
+  const { isError } = useGetCurrentUserQuery();
 
-  console.log(data.article);
+  useEffect(() => {
+    if (isError || !localStorage.getItem('token')) {
+      console.log('переход', localStorage.getItem('token'), !isError);
+      navigate('/sign-in');
+    }
+  }, [isLoading, isError, navigate]);
 
   if (isLoading) return <h1>Загрузка...</h1>;
 

@@ -1,20 +1,32 @@
 import { Outlet } from 'react-router';
-import style from './Layout.module.scss';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useGetCurrentUserQuery, useGetProfileQuery } from '../Api/artikleApi';
+import { setUsername, getUserFunc, setUserImg } from '../../store/sliceUser';
+import LayoutUnregister from '../LayoutUnregister/LayoutUnregister';
+import LayoutRegister from '../LayoutRegister/LayoutRegister';
 
 function Layout() {
+  const { isError, data = [] } = useGetCurrentUserQuery();
+  const user = useSelector(getUserFunc);
+  const { data: profileData, isLoading } = useGetProfileQuery(user, { skip: !user });
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!isError && localStorage.getItem('token') && data?.user?.username) {
+      dispatch(setUsername(data?.user?.username));
+    }
+  }, [isError, data, dispatch]);
+
+  useEffect(() => {
+    if (profileData) {
+      dispatch(setUserImg(profileData.profile.image));
+    }
+  }, [isLoading, profileData, dispatch]);
+
   return (
     <>
-      <div className={style.header_Box}>
-        <p className={style.header_BoxTitle}>Realworld Blog</p>
-        <div className={style.header_ButtonBox}>
-          <button type="button" className={style.header_ButtonBoxItemDOWN}>
-            Sign In
-          </button>
-          <button type="button" className={style.header_ButtonBoxItemUP}>
-            Sign Up
-          </button>
-        </div>
-      </div>
+      {profileData ? <LayoutRegister /> : <LayoutUnregister />}
       <Outlet />
     </>
   );

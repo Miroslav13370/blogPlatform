@@ -19,6 +19,7 @@
     "query-string": "^9.1.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.56.4",
     "react-markdown": "^10.1.0",
     "react-redux": "^9.2.0",
     "react-router": "^7.6.0",
@@ -47,5 +48,32 @@
     "sass": "^1.86.3",
     "vite": "^6.2.0",
     "vite-plugin-eslint": "^1.8.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb",
+      "airbnb/hooks",
+      "plugin:react/recommended",
+      "plugin:jsx-a11y/recommended",
+      "plugin:prettier/recommended"
+    ],
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+      "requireConfigFile": false,
+      "babelOptions": {
+        "presets": [
+          "@babel/preset-react"
+        ]
+      }
+    },
+    "plugins": [
+      "react",
+      "jsx-a11y",
+      "prettier",
+      "react-hooks"
+    ],
+    "rules": {
+      "react/jsx-props-no-spreading": "off"
+    }
   }
 }

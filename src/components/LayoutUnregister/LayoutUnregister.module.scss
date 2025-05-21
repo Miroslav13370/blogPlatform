@@ -1,0 +1,32 @@
+.header_Box {
+  display: flex;
+  box-sizing: border-box;
+  height: 80px;
+  justify-content: space-between;
+  background-color: white;
+  align-items: center;
+  .header_BoxTitle {
+    margin-left: 22px;
+  }
+  .header_ButtonBox {
+    display: flex;
+    align-items: center;
+    .header_ButtonBoxItemUP {
+      margin-right: 20px;
+      box-sizing: border-box;
+      width: 109px;
+      height: 50px;
+      background-color: white;
+      border: 1px solid #52c41a;
+      border-radius: 5px;
+      color: #52c41a;
+      font-size: 18px;
+    }
+    .header_ButtonBoxItemDOWN {
+      margin-right: 20px;
+      background-color: white;
+      border: none;
+      font-size: 18px;
+    }
+  }
+}
