@@ -68,6 +68,7 @@ function SingIn() {
         <label>
           <p>Email address</p>
           <input
+            type="email"
             className={errors.email ? style.errorBorder : ''}
             placeholder="Email address"
             {...register('email', {
@@ -79,6 +80,7 @@ function SingIn() {
         <label>
           <p>Password</p>
           <input
+            type="password"
             className={errors.password ? style.errorBorder : ''}
             placeholder="Password"
             {...register('password', {

@@ -85,6 +85,7 @@ function SignUp() {
         <label>
           <p>Email address</p>
           <input
+            type="email"
             className={errors.email ? style.errorBorder : ''}
             placeholder="Email address"
             {...register('email', {
@@ -100,6 +101,7 @@ function SignUp() {
         <label>
           <p>Password</p>
           <input
+            type="password"
             className={errors.password ? style.errorBorder : ''}
             placeholder="Password"
             {...register('password', {
@@ -119,6 +121,7 @@ function SignUp() {
         <label>
           <p>Repeat Password</p>
           <input
+            type="password"
             className={errors.confirmPassword ? style.errorBorder : ''}
             placeholder="Repeat Password"
             {...register('confirmPassword', {

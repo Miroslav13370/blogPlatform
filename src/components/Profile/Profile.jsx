@@ -34,14 +34,18 @@ function Profile() {
 
   const onSubmit = async (dat) => {
     try {
-      console.log(dat.username);
       const userData = {
         username: dat.username,
         email: dat.email,
         password: dat.password,
         image: dat.url,
       };
-      const result = await changeProfile(userData).unwrap();
+      const userData2 = {
+        username: dat.username,
+        email: dat.email,
+        image: dat.url,
+      };
+      const result = await changeProfile(dat.password ? userData : userData2).unwrap();
       navigate('/', { replace: true });
     } catch (err) {
       const apiErrors = err.data?.errors;
@@ -112,17 +116,15 @@ function Profile() {
         <label>
           <p>New password</p>
           <input
+            type="password"
             className={errors.password ? style.errorBorder : ''}
             placeholder="New password"
             {...register('password', {
-              required: 'Пароль обязателен',
-              minLength: {
-                value: 6,
-                message: 'Минимум 6 символов',
-              },
-              maxLength: {
-                value: 20,
-                message: 'Максимум 20 символов',
+              validate: (value) => {
+                if (!value) return true;
+                if (value.length < 6) return 'Минимум 6 символов';
+                if (value.length > 20) return 'Максимум 20 символов';
+                return true;
               },
             })}
           />
@@ -131,13 +133,13 @@ function Profile() {
         <label>
           <p>Avatar image (url)</p>
           <input
-            className={`${errors.username ? style.errorBorder : ''}`}
+            className={`${errors.url ? style.errorBorder : ''}`}
             placeholder="Вставьте ссылку"
             {...register('url', {
-              required: 'Ссылка обязательна',
-              pattern: {
-                value: /^(https?:\/\/)([\w.-]+\.[a-z]{2,})(\/[^\s]*)?$/i,
-                message: 'Введите корректный URL',
+              validate: (value) => {
+                if (!value) return true; // пусто — ок
+                const pattern = /^(https?:\/\/)([\w.-]+\.[a-z]{2,})(\/[^\s]*)?$/i;
+                return pattern.test(value) || 'Введите корректный URL';
               },
             })}
           />
