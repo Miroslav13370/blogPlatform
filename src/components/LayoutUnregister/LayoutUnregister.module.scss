@@ -7,6 +7,7 @@
   align-items: center;
   .header_BoxTitle {
     margin-left: 22px;
+    font-size: 18px;
   }
   .header_ButtonBox {
     display: flex;
@@ -21,12 +22,14 @@
       border-radius: 5px;
       color: #52c41a;
       font-size: 18px;
+      cursor: pointer;
     }
     .header_ButtonBoxItemDOWN {
       margin-right: 20px;
       background-color: white;
       border: none;
       font-size: 18px;
+      cursor: pointer;
     }
   }
 }

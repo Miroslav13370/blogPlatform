@@ -10,12 +10,32 @@ function LayoutRegister() {
 
   return (
     <div className={style.header_Box}>
-      <p className={style.header_BoxTitle}>Realworld Blog</p>
+      <button
+        className={style.header_BoxTitle}
+        type="button"
+        onClick={() => {
+          navigate('/');
+        }}
+      >
+        Realworld Blog
+      </button>
       <div className={style.header_ButtonBox}>
-        <button type="button" className={style.CreateArticle}>
+        <button
+          type="button"
+          className={style.CreateArticle}
+          onClick={() => {
+            navigate('new-article');
+          }}
+        >
           <p className={style.CreateArticleText}>Create article </p>
         </button>
-        <button type="button" className={style.header_ButtonBoxItemProfile}>
+        <button
+          type="button"
+          className={style.header_ButtonBoxItemProfile}
+          onClick={() => {
+            navigate('/profile');
+          }}
+        >
           <p>{userName}</p>
           <img src={img} alt="катринка" />
         </button>

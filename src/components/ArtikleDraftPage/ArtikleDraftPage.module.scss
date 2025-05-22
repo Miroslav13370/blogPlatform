@@ -88,6 +88,11 @@
     }
     .heart {
       margin-right: 3px;
+      cursor: pointer;
+    }
+    .checkLikes {
+      opacity: 0;
+      position: absolute;
     }
   }
   .logo {

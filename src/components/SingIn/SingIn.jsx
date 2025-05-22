@@ -30,7 +30,6 @@ function SingIn() {
         password: dat.password,
       };
       const result = await loginUser(userData).unwrap();
-      console.log(result);
       localStorage.setItem('token', result.user.token);
       navigate('/');
     } catch (err) {

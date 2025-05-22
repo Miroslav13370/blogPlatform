@@ -13,6 +13,15 @@ export const artikleApi = createApi({
     },
   }),
   endpoints: (build) => ({
+    createArticle: build.mutation({
+      query: (userData) => ({
+        url: 'articles',
+        method: 'POST',
+        body: {
+          article: userData,
+        },
+      }),
+    }),
     getList: build.query({
       query: ({ page = 1 } = {}) => {
         const limit = 5;
@@ -56,6 +65,33 @@ export const artikleApi = createApi({
         },
       }),
     }),
+    changeArticle: build.mutation({
+      query: ({ userData, slug }) => ({
+        url: `articles/${slug}`,
+        method: 'PUT',
+        body: {
+          article: userData,
+        },
+      }),
+    }),
+    deleteArticle: build.mutation({
+      query: (slug) => ({
+        url: `articles/${slug}`,
+        method: 'DELETE',
+      }),
+    }),
+    addFavorit: build.mutation({
+      query: (slug) => ({
+        url: `/articles/${slug}/favorite`,
+        method: 'POST',
+      }),
+    }),
+    deleteFavorit: build.mutation({
+      query: (slug) => ({
+        url: `/articles/${slug}/favorite`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
@@ -67,4 +103,9 @@ export const {
   useGetCurrentUserQuery,
   useGetProfileQuery,
   useChangeProfileMutation,
+  useCreateArticleMutation,
+  useChangeArticleMutation,
+  useDeleteArticleMutation,
+  useAddFavoritMutation,
+  useDeleteFavoritMutation,
 } = artikleApi;

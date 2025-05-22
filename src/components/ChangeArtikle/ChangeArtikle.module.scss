@@ -1,0 +1,156 @@
+.loginBox {
+  background-color: white;
+  width: 938px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  margin-top: 22px;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding-bottom: 48px;
+  box-shadow:
+    0px 0.61px 2.93px 0px rgba(0, 0, 0, 0.02),
+    0px 1.46px 7.05px 0px rgba(0, 0, 0, 0.03),
+    0px 2.75px 13.27px 0px rgba(0, 0, 0, 0.04),
+    0px 4.91px 23.68px 0px rgba(0, 0, 0, 0.04),
+    0px 9.19px 44.28px 0px rgba(0, 0, 0, 0.05),
+    0px 22px 106px 0px rgba(0, 0, 0, 0.07);
+  border-radius: 6px;
+
+  form label .errorBorder {
+    border: 1px solid #f5222d;
+  }
+  .SignIn {
+    display: flex;
+    margin: 0;
+    margin: 0;
+    p {
+      font-size: 12px;
+      margin-left: 2px;
+      color: #8c8c8c;
+      display: block;
+    }
+    margin-bottom: 35px;
+    .Link {
+      margin-top: 12px;
+      font-size: 12px;
+      margin-left: 2px;
+      color: #8c8c8c;
+      display: block;
+      color: #1890ff;
+      text-decoration: none;
+    }
+  }
+
+  label p {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    color: #262626;
+    margin-bottom: 2px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+  label {
+    margin-bottom: 12px;
+  }
+  .tagBox {
+    align-self: flex-start;
+    .inpTag {
+      width: 300px;
+      margin-right: 17px;
+    }
+    .inpTagButton {
+      background: none;
+      border: 1px solid #f5222d;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      padding-left: 18px;
+      padding-right: 18px;
+      font-size: 16px;
+      border-radius: 4px;
+      color: #f5222d;
+      margin-right: 17px;
+    }
+    .inpTagButtonAdd {
+      background: none;
+      border: 1px solid #1890ff;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      padding-left: 18px;
+      padding-right: 18px;
+      font-size: 16px;
+      border-radius: 4px;
+      color: #1890ff;
+      margin-right: 17px;
+    }
+  }
+  .check .checkbox {
+    width: 16px;
+    height: 16px;
+    margin-top: 12px;
+  }
+
+  form .submit {
+    margin: 0;
+    padding: 0;
+    background-color: #1890ff;
+    color: white;
+    max-width: 319px;
+    align-self: self-start;
+  }
+
+  .check {
+    margin-top: 10px;
+    display: flex;
+    border-top: 1px solid #e8e8e8;
+    width: 320px;
+    margin-bottom: 15px;
+    p {
+      margin-top: 8px;
+      display: inline-block;
+      width: 254px;
+      margin-left: 8px;
+      color: #595959;
+      line-height: 22px;
+    }
+  }
+  .title {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #262626;
+    margin-top: 48px;
+    margin-bottom: 21px;
+  }
+  .formBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    input {
+      margin: 0;
+      width: 847px;
+      height: 40px;
+      box-sizing: border-box;
+      padding: 12px 8px;
+      border: 1px solid #d9d9d9;
+      border-radius: 4px;
+    }
+    textarea {
+      margin: 0;
+      width: 847px;
+      height: 168px;
+      box-sizing: border-box;
+      padding: 12px 8px;
+      border: 1px solid #d9d9d9;
+      border-radius: 4px;
+      resize: none;
+    }
+    input::placeholder {
+      color: #bfbfbf;
+      font-size: 16px;
+    }
+  }
+}

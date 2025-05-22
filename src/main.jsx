@@ -9,6 +9,8 @@ import Artikle from './components/Artikle/Artikle';
 import SignUp from './components/signUp/SignUp';
 import SingIn from './components/SingIn/SingIn';
 import Profile from './components/Profile/Profile';
+import CreateArtikle from './components/createArtikle/CreateArtikle';
+import ChangeArtikle from './components/ChangeArtikle/ChangeArtikle';
 
 import store from './store/store';
 
@@ -32,6 +34,12 @@ const router = createBrowserRouter([
       { path: 'sign-up', element: <SignUp /> },
       { path: 'sign-in', element: <SingIn /> },
       { path: 'profile', element: <Profile /> },
+      { path: 'new-article', element: <CreateArtikle /> },
+      { path: '*', element: <h1>Not Found</h1> },
+      {
+        path: 'articles/:slug/edit',
+        element: <ChangeArtikle />,
+      },
     ],
   },
 ]);
