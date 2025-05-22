@@ -35,9 +35,6 @@ function Artikle() {
 
   useEffect(() => {
     refetch();
-    if (isError || !localStorage.getItem('token')) {
-      navigate('/sign-in');
-    }
   }, [isLoading, isError, navigate, refetch]);
 
   if (isLoading) return <h1>Загрузка...</h1>;
@@ -55,10 +52,11 @@ function Artikle() {
   const clickLikeFunc = async (e) => {
     if (e.target.checked) {
       await addFavorit(slug);
+      refetch();
     } else {
       await deleteFavorit(slug);
+      refetch();
     }
-    refetch();
   };
 
   return (
@@ -69,20 +67,24 @@ function Artikle() {
           <div className={style.leftBlock}>
             <div className={style.titleBox}>
               <p className={style.title}>{data.article.title}</p>
-              <label className={style.corsor}>
-                <img
-                  src={data.article.favorited ? like : Vector}
-                  alt="сердечко"
-                  className={style.heart}
-                />
-                <input
-                  type="checkbox"
-                  className={style.checkLikes}
-                  onChange={clickLikeFunc}
-                  checked={data.article.favorited}
-                />
-              </label>
-              <p className={style.favoritesCount}>{data.article.favoritesCount}</p>
+              {!isError && localStorage.getItem('token') && (
+                <>
+                  <label className={style.corsor}>
+                    <img
+                      src={data.article?.favorited ? like : Vector}
+                      alt="сердечко"
+                      className={style.heart}
+                    />
+                    <input
+                      type="checkbox"
+                      className={style.checkLikes}
+                      onChange={clickLikeFunc}
+                      checked={data.article.favorited}
+                    />
+                  </label>
+                  <p className={style.favoritesCount}>{data.article.favoritesCount}</p>
+                </>
+              )}
             </div>
             <div className={style.tagBox}>{tagFunction(data.article.tagList)}</div>
             <div className={style.descriptionBox}>

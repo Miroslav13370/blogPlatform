@@ -90,7 +90,7 @@ function SignUp() {
             {...register('email', {
               required: 'Введите email',
               pattern: {
-                value: /^\S{3,}@(gmail|yahoo|yandex|mail|outlook|protonmail)\.(com|ru|org|net)$/i,
+                value: /^\S{1,}@(gmail|yahoo|yandex|mail|outlook|protonmail)\.(com|ru|org|net)$/i,
                 message: 'Неверный email',
               },
             })}
@@ -128,15 +128,18 @@ function SignUp() {
           />
           {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
         </label>
-        <label className={style.check}>
-          <input
-            type="checkbox"
-            className={style.checkbox}
-            {...register('agree', {
-              required: 'Вы должны согласиться на обработку данных',
-            })}
-          />
-          <p>I agree to the processing of my personal information</p>
+        <label>
+          <div className={style.check}>
+            <input
+              type="checkbox"
+              className={style.checkbox}
+              {...register('agree', {
+                required: 'Вы должны согласиться на обработку данных',
+              })}
+            />
+            <p>I agree to the processing of my personal information</p>
+          </div>
+          {errors.agree && <p className={style.checked}>{errors.agree?.message}</p>}
         </label>
         <input type="submit" value="Create" className={style.submit} />
       </form>

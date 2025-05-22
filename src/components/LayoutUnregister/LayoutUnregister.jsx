@@ -1,15 +1,34 @@
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import style from './LayoutUnregister.module.scss';
 
 function LayoutUnregister() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const singClassFunc = (sing, def) => {
+    if (sing === '/sign-up' && def === 'up') {
+      return 'header_ButtonBoxItemUP';
+    }
+    if (sing === '/sign-in' && def === 'i') {
+      return 'header_ButtonBoxItemUP';
+    }
+    return 'header_ButtonBoxItemDOWN';
+  };
   return (
     <div className={style.header_Box}>
-      <p className={style.header_BoxTitle}>Realworld Blog</p>
+      <button
+        className={style.header_BoxTitle}
+        type="button"
+        onClick={() => {
+          navigate('/');
+        }}
+      >
+        Realworld Blog
+      </button>
       <div className={style.header_ButtonBox}>
         <button
           type="button"
-          className={style.header_ButtonBoxItemDOWN}
+          className={style[singClassFunc(location.pathname, 'i')]}
           onClick={() => {
             navigate('/sign-in');
           }}
@@ -18,7 +37,7 @@ function LayoutUnregister() {
         </button>
         <button
           type="button"
-          className={style.header_ButtonBoxItemUP}
+          className={style[singClassFunc(location.pathname, 'up')]}
           onClick={() => {
             navigate('/sign-up');
           }}

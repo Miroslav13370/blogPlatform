@@ -120,6 +120,10 @@ function CreateArtikle() {
           />
           {errors.text && <p>{errors.text?.message}</p>}
         </label>
+        <div className={style.tagg}>
+          <p className={style.taggs}>Tags</p>
+        </div>
+
         {fields.map((field, index) => (
           <label key={field.id} className={style.tagBox}>
             <input

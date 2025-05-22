@@ -5,13 +5,14 @@ import style from './Profile.module.scss';
 import { useChangeProfileMutation, useGetCurrentUserQuery } from '../Api/artikleApi';
 
 function Profile() {
-  const { isError, isLoading } = useGetCurrentUserQuery();
+  const { isError, isLoading, data } = useGetCurrentUserQuery();
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     watch,
     setError,
+    reset,
     clearErrors,
     formState: { errors },
   } = useForm({ mode: 'onChange' });
@@ -20,6 +21,14 @@ function Profile() {
   useEffect(() => {
     if (isError || !localStorage.getItem('token')) {
       navigate('/sign-in');
+    }
+
+    if (data) {
+      reset({
+        email: data.user.email,
+        username: data.user.username,
+        url: data.user.image,
+      });
     }
   }, [isError, navigate, isLoading]);
 
@@ -93,7 +102,7 @@ function Profile() {
             {...register('email', {
               required: 'Введите email',
               pattern: {
-                value: /^\S{3,}@(gmail|yahoo|yandex|mail|outlook|protonmail)\.(com|ru|org|net)$/i,
+                value: /^\S{1,}@(gmail|yahoo|yandex|mail|outlook|protonmail)\.(com|ru|org|net)$/i,
                 message: 'Неверный email',
               },
             })}
@@ -101,10 +110,10 @@ function Profile() {
           {errors.email && <p>{errors.email?.message}</p>}
         </label>
         <label>
-          <p>Password</p>
+          <p>New password</p>
           <input
             className={errors.password ? style.errorBorder : ''}
-            placeholder="Password"
+            placeholder="New password"
             {...register('password', {
               required: 'Пароль обязателен',
               minLength: {

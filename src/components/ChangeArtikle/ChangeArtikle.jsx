@@ -38,13 +38,16 @@ function ChangeArtikle() {
     if (isError || !localStorage.getItem('token')) {
       navigate('/sign-in');
     }
-
+    let tegs = data.article.tagList;
+    if (tegs.length === 0) {
+      tegs = [''];
+    }
     if (data) {
       reset({
         title: data.article.title,
         description: data.article.description,
         text: data.article.body,
-        tags: data.article.tagList.map((tag) => ({ value: tag })),
+        tags: tegs.map((tag) => ({ value: tag })),
       });
     }
   }, [isError, navigate, isLoading, data, reset]);
@@ -61,7 +64,7 @@ function ChangeArtikle() {
         tagList: dataTags,
       };
       await changeArticle({ userData, slug }).unwrap();
-      navigate(`/articles/${slug}`, { replace: true });
+      navigate(`/articles/${slug}`);
     } catch (err) {
       const apiErrors = err.data?.errors;
       console.log('Ошибка запроса:', err);
@@ -99,7 +102,7 @@ function ChangeArtikle() {
   return (
     <div className={style.loginBox}>
       <div className={style.titleBox}>
-        <p className={style.title}>Create new article</p>
+        <p className={style.title}>Edit article</p>
       </div>
       <form className={style.formBox} onSubmit={handleSubmit(onSubmit)}>
         <label>

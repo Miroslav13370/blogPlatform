@@ -6,7 +6,7 @@ import Vector from '../img/Vector.svg';
 import like from '../img/path4.svg';
 import { useAddFavoritMutation, useDeleteFavoritMutation } from '../Api/artikleApi';
 
-function ArtikleDraftPage({ elem, refegh }) {
+function ArtikleDraftPage({ elem, refegh, isError }) {
   const location = useLocation();
   const funcLocate = (locate, slug) => {
     if (locate === '/') {
@@ -19,7 +19,7 @@ function ArtikleDraftPage({ elem, refegh }) {
   const tagFunction = (list) => {
     return list.map((el) => {
       return (
-        <p key={el} className={style.tagElem}>
+        <p key={Math.random()} className={style.tagElem}>
           {el}
         </p>
       );
@@ -30,10 +30,11 @@ function ArtikleDraftPage({ elem, refegh }) {
   const clickLikeFunc = async (e) => {
     if (e.target.checked) {
       await addFavorit(elem.slug);
+      refegh();
     } else {
       await deleteFavorit(elem.slug);
+      refegh();
     }
-    refegh();
   };
 
   return (
@@ -41,18 +42,22 @@ function ArtikleDraftPage({ elem, refegh }) {
       <div className={style.leftBlock}>
         <div className={style.titleBox}>
           <Link className={style.title} to={funcLocate(location.pathname, elem.slug)}>
-            {elem.title.slice(0, 50)}
+            {elem.title ? elem.title.slice(0, 50) : 'Нет заголовка'}
           </Link>
-          <label>
-            <img src={elem.favorited ? like : Vector} alt="сердечко" className={style.heart} />
-            <input
-              type="checkbox"
-              className={style.checkLikes}
-              onChange={clickLikeFunc}
-              checked={elem.favorited}
-            />
-          </label>
-          <p className={style.favoritesCount}>{elem.favoritesCount}</p>
+          {!isError && localStorage.getItem('token') && (
+            <>
+              <label>
+                <img src={elem.favorited ? like : Vector} alt="сердечко" className={style.heart} />
+                <input
+                  type="checkbox"
+                  className={style.checkLikes}
+                  onChange={clickLikeFunc}
+                  checked={elem.favorited}
+                />
+              </label>
+              <p className={style.favoritesCount}>{elem.favoritesCount}</p>
+            </>
+          )}
         </div>
         <div className={style.tagBox}>{tagFunction(elem.tagList)}</div>
         <p className={style.description}>{`${elem.description.slice(0, 300)}`}</p>
@@ -73,4 +78,5 @@ export default ArtikleDraftPage;
 ArtikleDraftPage.propTypes = {
   elem: PropTypes.arrayOf,
   refegh: PropTypes.func,
+  isError: PropTypes.bool,
 };
