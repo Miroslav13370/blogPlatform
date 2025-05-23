@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import style from './LayoutRegister.module.scss';
 import { getUserImgFunc, getUserFunc } from '../../store/sliceUser';
 
@@ -7,6 +7,7 @@ function LayoutRegister() {
   const img = useSelector(getUserImgFunc);
   const userName = useSelector(getUserFunc);
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <div className={style.header_Box}>
@@ -14,6 +15,10 @@ function LayoutRegister() {
         className={style.header_BoxTitle}
         type="button"
         onClick={() => {
+          if (location.pathname === '/') {
+            localStorage.setItem('page', 1);
+            navigate(0);
+          }
           navigate('/');
         }}
       >
