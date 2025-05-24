@@ -5,7 +5,9 @@ import style from './CreateArtikle.module.scss';
 import { useCreateArticleMutation, useGetCurrentUserQuery } from '../Api/artikleApi';
 
 function CreateArtikle() {
-  const { isError, isLoading } = useGetCurrentUserQuery();
+  const { isError, isLoading } = useGetCurrentUserQuery(undefined, {
+    skip: !localStorage.getItem('token'),
+  });
   const navigate = useNavigate();
   const {
     register,
@@ -45,8 +47,8 @@ function CreateArtikle() {
         body: dat.text,
         tagList: dataTags,
       };
-      await сreateArticle(userData).unwrap();
-      navigate('/', { replace: true });
+      const res = await сreateArticle(userData).unwrap();
+      navigate(`/articles/${res.article.slug}`);
     } catch (err) {
       const apiErrors = err.data?.errors;
       console.log('Ошибка запроса:', err);

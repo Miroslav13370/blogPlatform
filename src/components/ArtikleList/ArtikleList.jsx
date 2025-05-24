@@ -7,16 +7,14 @@ function ArtikleList() {
   const page = localStorage.getItem('page') ? localStorage.getItem('page') : 1;
   const {
     data = [],
-    isLoading,
     isFetching,
     refetch,
   } = useGetListQuery({ page }, { refetchOnMountOrArgChange: true });
-  const { isError } = useGetCurrentUserQuery();
+  const { isError } = useGetCurrentUserQuery(undefined, { skip: !localStorage.getItem('token') });
 
-  if (isLoading) return <h1>Загрузка...</h1>;
   return (
     <>
-      {isFetching && <h2>Обновление страницы...</h2>}
+      {isFetching && <h2>Загрузка...</h2>}
       {!isFetching &&
         data?.articles?.map((elem) => {
           return (

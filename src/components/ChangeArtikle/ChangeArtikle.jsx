@@ -12,7 +12,13 @@ function ChangeArtikle() {
   const { slug } = useParams();
   const [changeArticle] = useChangeArticleMutation();
   const { data } = useGetArticleBySlagQuery({ slug }, { skip: !slug });
-  const { isError, isLoading } = useGetCurrentUserQuery();
+  const {
+    isError,
+    isLoading,
+    data: userDatas,
+  } = useGetCurrentUserQuery(undefined, {
+    skip: !localStorage.getItem('token'),
+  });
   const navigate = useNavigate();
   const {
     register,
@@ -38,8 +44,12 @@ function ChangeArtikle() {
     if (isError || !localStorage.getItem('token')) {
       navigate('/sign-in');
     }
-    let tegs = data.article.tagList;
-    if (tegs.length === 0) {
+    if (data && userDatas && data?.article?.author?.username !== userDatas?.user?.username) {
+      navigate(`/articles/${slug}`);
+    }
+
+    let tegs = data?.article?.tagList;
+    if (tegs?.length === 0 && data) {
       tegs = [''];
     }
     if (data) {
@@ -50,7 +60,7 @@ function ChangeArtikle() {
         tags: tegs.map((tag) => ({ value: tag })),
       });
     }
-  }, [isError, navigate, isLoading, data, reset]);
+  }, [isError, navigate, isLoading, data, reset, userDatas]);
 
   const onSubmit = async (dat) => {
     try {

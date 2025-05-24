@@ -7,13 +7,15 @@ import LayoutUnregister from '../LayoutUnregister/LayoutUnregister';
 import LayoutRegister from '../LayoutRegister/LayoutRegister';
 
 function Layout() {
-  const { isError, data = [] } = useGetCurrentUserQuery();
+  const { isError, data = [] } = useGetCurrentUserQuery(undefined, {
+    skip: !localStorage.getItem('token'),
+  });
   const user = useSelector(getUserFunc);
   const { data: profileData, isLoading } = useGetProfileQuery(user, { skip: !user });
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!isError && localStorage.getItem('token') && data?.user?.username) {
+    if (!isError && localStorage.getItem('token')) {
       dispatch(setUsername(data?.user?.username));
     }
   }, [isError, data, dispatch]);
@@ -26,7 +28,7 @@ function Layout() {
 
   return (
     <>
-      {profileData ? <LayoutRegister /> : <LayoutUnregister />}
+      {profileData?.profile ? <LayoutRegister /> : <LayoutUnregister />}
       <Outlet />
     </>
   );

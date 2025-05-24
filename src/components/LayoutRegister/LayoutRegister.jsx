@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
+
 import style from './LayoutRegister.module.scss';
 import { getUserImgFunc, getUserFunc } from '../../store/sliceUser';
 

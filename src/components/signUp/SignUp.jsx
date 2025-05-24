@@ -5,7 +5,9 @@ import style from './SignUp.module.scss';
 import { useRegisterMutation, useGetCurrentUserQuery } from '../Api/artikleApi';
 
 function SignUp() {
-  const { isError, isLoading } = useGetCurrentUserQuery();
+  const { isError, isLoading } = useGetCurrentUserQuery(undefined, {
+    skip: !localStorage.getItem('token'),
+  });
   const navigate = useNavigate();
   const {
     register,
@@ -33,6 +35,7 @@ function SignUp() {
       const result = await registerUser(userData).unwrap();
       localStorage.setItem('token', result.user.token);
       navigate('/sign-in');
+      window.location.reload();
     } catch (err) {
       const apiErrors = err.data?.errors;
       console.log('Ошибка запроса:', err);

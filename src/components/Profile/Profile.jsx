@@ -5,7 +5,9 @@ import style from './Profile.module.scss';
 import { useChangeProfileMutation, useGetCurrentUserQuery } from '../Api/artikleApi';
 
 function Profile() {
-  const { isError, isLoading, data } = useGetCurrentUserQuery();
+  const { isError, isLoading, data } = useGetCurrentUserQuery(undefined, {
+    skip: !localStorage.getItem('token'),
+  });
   const navigate = useNavigate();
   const {
     register,
@@ -30,7 +32,7 @@ function Profile() {
         url: data.user.image,
       });
     }
-  }, [isError, navigate, isLoading]);
+  }, [isError, navigate, isLoading, data, reset]);
 
   const onSubmit = async (dat) => {
     try {
@@ -45,11 +47,11 @@ function Profile() {
         email: dat.email,
         image: dat.url,
       };
-      const result = await changeProfile(dat.password ? userData : userData2).unwrap();
+      await changeProfile(dat.password ? userData : userData2).unwrap();
       navigate('/', { replace: true });
+      window.location.reload();
     } catch (err) {
       const apiErrors = err.data?.errors;
-      console.log('Ошибка запроса:', err);
       if (apiErrors?.email) {
         setError('email', {
           type: 'server',

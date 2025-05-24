@@ -5,7 +5,9 @@ import style from './SingIn.module.scss';
 import { useLoginMutation, useGetCurrentUserQuery } from '../Api/artikleApi';
 
 function SingIn() {
-  const { isError, data: currentData = [], isLoading } = useGetCurrentUserQuery();
+  const { isError, isLoading } = useGetCurrentUserQuery(undefined, {
+    skip: !localStorage.getItem('token'),
+  });
 
   const navigate = useNavigate();
   const {
@@ -32,6 +34,7 @@ function SingIn() {
       const result = await loginUser(userData).unwrap();
       localStorage.setItem('token', result.user.token);
       navigate('/');
+      window.location.reload();
     } catch (err) {
       const apiErrors = err.data?.errors['email or password'];
       console.log(apiErrors);

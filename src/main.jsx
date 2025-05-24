@@ -11,6 +11,7 @@ import SingIn from './components/SingIn/SingIn';
 import Profile from './components/Profile/Profile';
 import CreateArtikle from './components/createArtikle/CreateArtikle';
 import ChangeArtikle from './components/ChangeArtikle/ChangeArtikle';
+import NotFound from './components/notFound/NotFound';
 
 import store from './store/store';
 
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
       { path: 'sign-in', element: <SingIn /> },
       { path: 'profile', element: <Profile /> },
       { path: 'new-article', element: <CreateArtikle /> },
-      { path: '*', element: <h1>Not Found</h1> },
+      { path: '*', element: <NotFound /> },
       {
         path: 'articles/:slug/edit',
         element: <ChangeArtikle />,

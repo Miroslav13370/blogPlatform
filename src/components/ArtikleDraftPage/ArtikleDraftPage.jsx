@@ -12,7 +12,7 @@ function ArtikleDraftPage({ elem, refegh, isError }) {
     if (locate === '/') {
       return `articles/${slug}`;
     }
-    return slug;
+    return `/articles/${slug}`;
   };
   const [addFavorit] = useAddFavoritMutation();
   const [deleteFavorit] = useDeleteFavoritMutation();

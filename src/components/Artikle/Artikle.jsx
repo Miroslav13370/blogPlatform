@@ -31,11 +31,11 @@ function Artikle() {
     isError: errr,
     refetch,
   } = useGetArticleBySlagQuery({ slug }, { skip: !slug });
-  const { isError } = useGetCurrentUserQuery();
+  const { isError } = useGetCurrentUserQuery(undefined, { skip: !localStorage.getItem('token') });
 
   useEffect(() => {
     refetch();
-  }, [isLoading, isError, navigate, refetch]);
+  }, [isLoading, isError, refetch]);
 
   if (isLoading) return <h1>Загрузка...</h1>;
 
